@@ -1,0 +1,125 @@
+/* General Page Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.logo {
+    background-color: #636585;    /*PharmaCool secondary color logo */
+    color: #1a237e;               /* PharmaCool primary color logo */
+    max-width: 350px;
+    margin: 40px auto 10px auto; 
+    padding: 20px 30px;          
+    border-radius: 10px;       
+    text-align: center;           
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Fix the h1 spacing inside the logo */
+.logo h1 {
+    margin: 0;                    /* CRITICAL: Removes default browser spacing */
+    font-size: 2.5rem;            /* Scales up the text for the home page */
+    font-weight: bold;
+    letter-spacing: 1px;          /* Gives it a slightly more branded look */
+}
+
+/* 1. Group Member Section  */
+.team-container {
+    color: #1a237e; /* PharmaCool branding color */
+    display: flex;
+    background-color: #636585;
+    padding: 30px;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+    max-width: 90%;
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+ 
+}
+.team-container h3 {
+    width: 100%;         
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 0; 
+}
+
+.member-card {
+    text-align: center;
+    text-decoration-color: #1a237e;
+}
+
+.member-card img {
+    width: 150px;  
+    height: 150px;
+    object-fit: cover; /* Prevents rectangular images from stretching */
+    border: 3px solid #1a237e; /* Kept the border, just applied to the square now */
+    margin-bottom: 10px;
+}
+
+.member-card p {
+    font-weight: bold;
+    margin: 0;
+    color: #1a237e;
+}
+
+/* 2. Login Area  */
+.login-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 350px;
+    margin-bottom: 30px;
+}
+
+.login-box h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #333;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Important for padding */
+}
+
+/* 3. Login Button  */
+.login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1a237e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.login-button:hover {
+    background-color: #3949ab;
+}
+
+/* Error Message Styling */
+.error-msg {
+    color: #d32f2f;
+    background: #ffcdd2;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 14px;
+}
