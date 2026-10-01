@@ -1,0 +1,928 @@
+/* ============================================================
+   warehouse-style.css
+   Supplement to driver-style.css.
+   Load AFTER driver-style.css on every warehouse page.
+   ============================================================ */
+ 
+ 
+/* ── Sidebar nav links (driver-style.css doesn't wrap <a> in <li>) ── */
+.sidebar .nav-links a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+.sidebar .nav-links li:hover a {
+    color: white;
+}
+ 
+ 
+/* ─────────────────────────────────────────────────────────────
+   SHARED — cards, search, status colours used on every page
+   ───────────────────────────────────────────────────────────── */
+ 
+/* Five summary cards can wrap on narrow screens */
+/*.stats-row {
+    flex-wrap: wrap;
+}
+.stats-row .card {
+    min-width: 160px;
+}*/
+ 
+/* Amber "warn" variant (expiring lots) */
+.card.warn {
+    border-left: 4px solid #dd6b20;
+    background: #fffaf0;
+}
+.card.warn h3 {
+    color: #c05621;
+}
+ 
+/* Red "alert" variant (open excursions) */
+.card.alert {
+    border-left: 4px solid #c53030;
+    background: #fff5f5;
+}
+.card.alert h3 {
+    color: #9b2c2c;
+}
+ 
+/* Warehouse / shipment operational status text */
+.status-text.active            { color: #2f855a; font-weight: 600; }
+.status-text.under-maintenance { color: #dd6b20; font-weight: 600; }
+.status-text.closed            { color: #c53030; font-weight: 600; }
+ 
+/* Resolution status text used in breach tables */
+.status-text.open         { color: #c53030; font-weight: 700; }
+.status-text.under-review { color: #dd6b20; font-weight: 600; }
+.status-text.resolved     { color: #2f855a; font-weight: 600; }
+ 
+/* Muted placeholder text */
+.muted { color: #a0aec0; }
+ 
+ 
+/* ─────────────────────────────────────────────────────────────
+   SECTION 1 — Overview screen (whome.php)
+   ───────────────────────────────────────────────────────────── */
+ 
+/* -------------------------------------------
+   Single Primary Warehouse Card
+------------------------------------------- */
+.wh-primary-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    max-width: 550px; /* Keeps the card perfectly sized */
+    display: flex;
+    flex-direction: column;
+}
+
+.wh-primary-card:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+    border-color: #cbd5e0;
+}
+
+.wh-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 0;
+}
+
+.wh-card-meta {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.wh-card-title {
+    padding: 10px 20px 5px;
+}
+
+.wh-card-title h2 {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    color: #1a202c;
+}
+
+.wh-card-title p {
+    margin: 0;
+    font-size: 13px;
+}
+
+.wh-alert-banner {
+    margin: 15px 20px 0;
+    font-size: 12px;
+}
+
+.wh-card-body {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.donut-center-text {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a202c;
+    pointer-events: none; /* Allows mouse to hover through the text onto the chart */
+}
+
+.wh-card-footer {
+    display: flex;
+    border-top: 1px solid #e2e8f0;
+    background: #f7fafc;
+    border-radius: 0 0 12px 12px;
+}
+
+.wh-stat {
+    flex: 1;
+    text-align: center;
+    padding: 15px 10px;
+    border-right: 1px solid #e2e8f0;
+}
+
+.wh-stat:last-child {
+    border-right: none;
+}
+
+.wh-stat h4 {
+    margin: 0 0 4px 0;
+    font-size: 18px;
+    color: #1a202c;
+}
+
+.wh-stat p {
+    margin: 0;
+    font-size: 10px;
+    font-weight: 700;
+    color: #718096;
+    letter-spacing: 0.5px;
+}
+
+.stat-danger h4, .stat-danger p {
+    color: #e53e3e;
+}
+
+/* Dark Mode Overrides */
+body.dark-mode .wh-primary-card { background: #2d3748; border-color: #4a5568; }
+body.dark-mode .wh-card-title h2, body.dark-mode .donut-center-text, body.dark-mode .wh-stat h4 { color: #edf2f7; }
+body.dark-mode .wh-card-footer { background: #1a202c; border-color: #4a5568; }
+body.dark-mode .wh-stat { border-color: #4a5568; }
+
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 2 — Detail screen (warehouse-details.php)
+   ───────────────────────────────────────────────────────────── */
+ 
+/* Breadcrumb back link */
+.breadcrumb {
+    margin: 0 0 16px 0;
+    font-size: 13px;
+}
+.breadcrumb a {
+    color: #3182ce;
+    text-decoration: none;
+    font-weight: 600;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+ 
+/* Warehouse header block */
+.wh-header {
+    background: white;
+    padding: 20px 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 20px;
+}
+.wh-header h2 {
+    margin: 0 0 6px 0;
+    color: #1a237e;
+}
+.wh-header .wh-meta {
+    margin: 4px 0 0 0;
+    color: #4a5568;
+    font-size: 13px;
+}
+ 
+/* Flash messages */
+.flash {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.flash-ok {
+    background: #f0fff4;
+    border-left: 4px solid #2f855a;
+    color: #22543d;
+}
+.flash-err {
+    background: #fff5f5;
+    border-left: 4px solid #c53030;
+    color: #742a2a;
+}
+ 
+/* Zone table — 7 columns */
+.zone-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+ 
+.zone-table th:nth-child(1), .zone-table td:nth-child(1) { width: 10%; }
+.zone-table th:nth-child(2), .zone-table td:nth-child(2) { width: 16%; }
+.zone-table th:nth-child(3), .zone-table td:nth-child(3) { width: 18%; }
+.zone-table th:nth-child(4), .zone-table td:nth-child(4) { width: 14%; }
+.zone-table th:nth-child(5), .zone-table td:nth-child(5) { width: 14%; }
+.zone-table th:nth-child(6), .zone-table td:nth-child(6) { width: 12%; }
+.zone-table th:nth-child(7), .zone-table td:nth-child(7) { width: 16%; }
+ 
+.zone-table tbody tr {
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.zone-table tbody tr:hover         { background-color: #ebf8ff; }
+.zone-table tbody tr.row-alert     { background-color: #fffaf0; border-left: 4px solid #dd6b20; }
+.zone-table tbody tr.row-alert:hover { background-color: #feebc8; }
+.zone-table tbody tr.row-selected  { background-color: #ebf8ff; border-left: 4px solid #3182ce; }
+.zone-table tbody tr.row-selected.row-alert {
+    background-color: #fffaf0;
+    border-left: 4px solid #3182ce;
+}
+ 
+/* Zone detail section */
+.zone-detail {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #e2e8f0;
+}
+.zone-detail h2 {
+    margin: 0 0 16px 0;
+    color: #1a237e;
+}
+ 
+/* Lots table — 7 columns */
+.lots-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+ 
+.lots-table th:nth-child(1), .lots-table td:nth-child(1) { width: 22%; }
+.lots-table th:nth-child(2), .lots-table td:nth-child(2) { width: 11%; }
+.lots-table th:nth-child(3), .lots-table td:nth-child(3) { width: 10%; }
+.lots-table th:nth-child(4), .lots-table td:nth-child(4) { width:  6%; }
+.lots-table th:nth-child(5), .lots-table td:nth-child(5) { width: 10%; }
+.lots-table th:nth-child(6), .lots-table td:nth-child(6) { width: 14%; }
+.lots-table th:nth-child(7), .lots-table td:nth-child(7) { width: 17%; }
+ 
+/* Expiry row colouring */
+.lots-table tbody tr.expiring-soon   { background-color: #fffbea; border-left: 4px solid #d69e2e; }
+.lots-table tbody tr.expiring-urgent { background-color: #fff5f5; border-left: 4px solid #c53030; }
+.lots-table tbody tr.expired         { background-color: #edf2f7; color: #718096; border-left: 4px solid #4a5568; }
+ 
+/* Temperature chart container */
+.chart-wrap {
+    position: relative;
+    height: 280px;
+    width: 100%;
+}
+ 
+/* Breach history table — 5 columns */
+.breach-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+ 
+.breach-table th:nth-child(1), .breach-table td:nth-child(1) { width: 20%; }
+.breach-table th:nth-child(2), .breach-table td:nth-child(2) { width: 20%; }
+.breach-table th:nth-child(3), .breach-table td:nth-child(3) { width: 18%; }
+.breach-table th:nth-child(4), .breach-table td:nth-child(4) { width: 18%; }
+.breach-table th:nth-child(5), .breach-table td:nth-child(5) { width: 24%; }
+ 
+.breach-table tbody tr.row-alert {
+    background-color: #fffaf0;
+    border-left: 4px solid #dd6b20;
+}
+ 
+/* Inline breach update form */
+.breach-form {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 0;
+}
+.breach-form select {
+    padding: 6px 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 13px;
+    font-family: inherit;
+    background: white;
+    color: #2d3748;
+    cursor: pointer;
+}
+.breach-form select:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 2px rgba(49,130,206,0.2);
+}
+.btn-save {
+    padding: 6px 14px;
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.15s ease;
+}
+.btn-save:hover  { background-color: #2b6cb0; }
+.btn-save:active { background-color: #2c5282; }
+ 
+/* Data source badges on the temperature chart heading */
+.data-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-left: 10px;
+    font-family: inherit;
+    cursor: help;
+}
+.data-badge-live     { background: #c6f6d5; color: #22543d; border: 1px solid #9ae6b4; }
+.data-badge-fallback { background: #feebc8; color: #7b341e; border: 1px solid #f6ad55; }
+.data-badge-none     { background: #edf2f7; color: #4a5568; border: 1px solid #cbd5e0; }
+.data-badge-note {
+    font-size: 11px;
+    font-weight: 500;
+    color: #718096;
+    margin-left: 6px;
+    vertical-align: middle;
+    font-family: inherit;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 3 — Custody log screen (wcustody.php)
+   ───────────────────────────────────────────────────────────── */
+
+/* Filter form layout */
+.filter-form {
+    margin: 0;
+}
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+.filter-row label {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    font-weight: 600;
+    color: #4a5568;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex: 1 1 180px;
+    min-width: 160px;
+}
+.filter-row input[type="date"],
+.filter-row select {
+    margin-top: 4px;
+    padding: 8px 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #2d3748;
+    background: white;
+}
+.filter-row input[type="date"]:focus,
+.filter-row select:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 2px rgba(49,130,206,0.2);
+}
+
+/* Filter action bar */
+.filter-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    border-top: 1px solid #edf2f7;
+    padding-top: 14px;
+}
+
+/* "Clear filters" — neutral pill */
+.btn-clear {
+    padding: 6px 14px;
+    background-color: #f1f5f9;
+    color: #1e293b;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #cbd5e1;
+    font-weight: 600;
+    font-size: 13px;
+}
+.btn-clear:hover { background-color: #e2e8f0; }
+
+/* Primary export — solid green, pushed to the right */
+.btn-export {
+    padding: 6px 14px;
+    background-color: #2f855a;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: auto;
+}
+.btn-export:hover { background-color: #276749; }
+
+/* Secondary export — outline, sits flush beside the primary one */
+.btn-export-all {
+    background-color: white;
+    color: #2f855a;
+    border: 1px solid #2f855a;
+    margin-left: 0;
+}
+.btn-export-all:hover {
+    background-color: #f0fff4;
+    color: #276749;
+}
+
+/* Custody table — 6 columns */
+.custody-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.custody-table th:nth-child(1), .custody-table td:nth-child(1) { width: 16%; }
+.custody-table th:nth-child(2), .custody-table td:nth-child(2) { width: 18%; }
+.custody-table th:nth-child(3), .custody-table td:nth-child(3) { width: 20%; }
+.custody-table th:nth-child(4), .custody-table td:nth-child(4) { width: 17%; }
+.custody-table th:nth-child(5), .custody-table td:nth-child(5) { width: 17%; }
+.custody-table th:nth-child(6), .custody-table td:nth-child(6) { width: 12%; }
+
+/* From/To columns are the part the user actually reads — let them wrap
+   instead of getting ellipsis-clipped by the inherited driver-style rule. */
+.custody-table tbody td:nth-child(4),
+.custody-table tbody td:nth-child(5) {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    line-height: 1.3;
+}
+
+/* Condition pills */
+.cond-pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.cond-intact  { background: #c6f6d5; color: #22543d; border: 1px solid #9ae6b4; }
+.cond-damaged { background: #fed7d7; color: #742a2a; border: 1px solid #fc8181; }
+/* ─────────────────────────────────────────────────────────────
+    Inbound / Outbound Shipments screen
+   ───────────────────────────────────────────────────────────── */
+
+.main-content {
+    padding: 30px;
+}
+
+.main-content h2 {
+    margin-top: 18px;
+    margin-bottom: 8px;
+}
+
+.main-content > p,
+.dashboard > p {
+    color: #718096;
+    margin-bottom: 20px;
+}
+/* Container for the tabs */
+.shipment-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e2e8f0; /* Creates a nice baseline for the tabs to sit on */
+}
+
+/* Individual Tab Styling */
+.shipment-tabs a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #edf2f7;
+    color: #4a5568;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 8px 8px 0 0; /* Rounds the top corners, keeps bottom flat */
+    border: 1px solid transparent;
+    border-bottom: none;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover State (When mouse is over an inactive tab) */
+.shipment-tabs a:hover {
+    background: #e2e8f0;
+    color: #2d3748;
+}
+
+/* Active Tab State (The tab you are currently looking at) */
+.shipment-tabs a.active {
+    background: #3182ce; /* PharmaCool Blue */
+    color: #ffffff;
+    border-color: #3182ce;
+}
+
+/* Make the summary cards look cleaner */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap: 24px;
+    margin: 20px 0 36px;
+}
+
+.stats-row .card {
+    min-height: 110px;
+    padding: 26px;
+}
+
+/* Main white panel */
+.table-container {
+    background: white;
+    padding: 24px;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+    overflow-x: auto;
+}
+
+/* Inbound / Outbound links */
+.table-container > a {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background: #edf2f7;
+    color: #2d3748;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.table-container > a:hover {
+    background: #3182ce;
+    color: white;
+}
+
+/* Filter row */
+.table-container form,
+.filters,
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    margin: 14px 0 24px;
+}
+
+.table-container label,
+.filters label,
+.filter-form label {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.table-container select,
+.table-container input[type="date"],
+.filters select,
+.filters input[type="date"] {
+    padding: 8px 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+}
+
+/* Apply button */
+.table-container button,
+button[type="submit"] {
+    background: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 9px 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.table-container button:hover,
+button[type="submit"]:hover {
+    background: #2b6cb0;
+}
+
+/* Clear link */
+.table-container form a,
+.filter-form a {
+    color: #3182ce;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.table-container form a:hover,
+.filter-form a:hover {
+    text-decoration: underline;
+}
+
+/* Shipment table */
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.table-container th {
+    padding: 12px 16px;
+    border-bottom: 2px solid #e2e8f0;
+    text-align: left;
+    font-size: 13px;
+    color: #1a202c;
+    white-space: nowrap;
+}
+
+.table-container td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #edf2f7;
+    vertical-align: middle;
+    color: #2d3748;
+}
+
+/* Destination column wrap */
+.table-container td:nth-child(3) {
+    max-width: 320px;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    line-height: 1.3;
+}
+
+/* Keep IDs/status/actions clean */
+.table-container td:nth-child(1),
+.table-container td:nth-child(2),
+.table-container td:nth-child(4),
+.table-container td:nth-child(5),
+.table-container td:nth-child(6),
+.table-container td:nth-child(7),
+.table-container td:nth-child(8) {
+    white-space: nowrap;
+}
+/* Primary action (Apply filters) */
+.btn-primary {
+    background-color: #3182ce;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #2b6cb0;
+}
+
+/* Secondary neutral (Clear) */
+.btn-clear {
+    background-color: #edf2f7;
+    color: #2d3748;
+    border: 1px solid #cbd5e0;
+}
+
+.btn-clear:hover {
+    background-color: #e2e8f0;
+}
+
+/* Export buttons — FIXED (no more bright green clash) */
+.btn-export,
+.btn-export-all {
+    background-color: white;
+    color: #3182ce;
+    border: 1px solid #3182ce;
+    font-weight: 600;
+}
+
+.btn-export:hover,
+.btn-export-all:hover {
+    background-color: #ebf8ff;
+}
+
+/* If you still want ONE green button, make it subtle */
+.btn-success {
+    background-color: #38a169;
+    color: white;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #2f855a;
+}
+/* ─────────────────────────────
+   Pagination
+   ───────────────────────────── */
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 12px 16px;
+    background: #f7fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+/* Prev / Next buttons */
+.page-btn {
+    padding: 8px 14px;
+    background-color: #3182ce;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.page-btn:hover {
+    background-color: #2b6cb0;
+}
+
+/* Disabled buttons */
+.page-btn.disabled {
+    background-color: #edf2f7;
+    color: #a0aec0;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* Page dropdown */
+.page-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.page-selector select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e0;
+    background: white;
+    font-weight: 600;
+}
+
+.page-selector span {
+    color: #4a5568;
+    font-size: 14px;
+}
+/* ─────────────────────────────
+   Custody Log Table Scroll Fix
+   ───────────────────────────── */
+
+.table-container {
+    overflow-x: auto;
+}
+
+/* Force table to be wider than container so scroll appears */
+.custody-table {
+    min-width: 1200px;
+    border-collapse: collapse;
+}
+
+/* Keep headers clean */
+.custody-table th {
+    white-space: nowrap;
+}
+
+/* Prevent cells from wrapping weirdly */
+.custody-table td {
+    white-space: nowrap;
+}
+
+/* Scoped styling for the system-wide occupancy mix tile.
+    Inlined deliberately so the tile renders correctly even
+    if warehouse-style.css is missing or out of sync. */
+.card.card-wide {
+    grid-column: span 2;
+    min-width: 320px;
+    padding: 14px 18px;
+}
+.occ-mix-layout {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.occ-mix-chart {
+    width: 130px;
+    height: 130px;
+    flex: 0 0 130px;
+    position: relative;
+}
+.occ-mix-chart canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+.occ-mix-meta {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.occ-mix-title {
+    margin: 0 0 4px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #4b5563;
+}
+.occ-mix-total {
+    margin: 0 0 8px;
+    font-size: 0.85rem;
+    color: #4b5563;
+}
+.occ-mix-total strong {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #111827;
+    margin-right: 4px;
+}
+.occ-mix-legend {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.78rem;
+    color: #374151;
+}
+.occ-mix-legend li {
+    display: flex;
+    align-items: center;
+    margin: 2px 0;
+}
+.occ-mix-legend .sw {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    margin-right: 6px;
+    flex: 0 0 10px;
+}
+.occ-mix-legend em {
+    margin-left: auto;
+    font-style: normal;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* 1. Add vertical scrolling to the container */
+.table-scroll {
+    max-height: 300px; /* Adjust this number to make the visible area taller or shorter */
+    overflow-y: auto;  /* Adds the vertical scrollbar only when needed */
+    overflow-x: auto;  /* Keeps your existing horizontal scrollbar */
+}
+
+/* 2. Lock the table header so it doesn't scroll away (Highly Recommended UX) */
+.table-scroll thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1; 
+    background-color: #f4f7f9; /* MUST be a solid color, otherwise rows will show through the header */
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1); /* Adds a tiny shadow under the header when scrolling */
+}
+
+body.dark-mode .table-scroll thead th {
+    background-color: #4a5568; 
+}
