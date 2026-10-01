@@ -9,9 +9,9 @@ A full-stack cold-chain logistics platform built to manage pharmaceutical invent
 * **Chain-of-Custody Logging:** End-to-end traceability of lot transfers across vendors, warehouses, vehicles, and destination clinics.
 
 ## Architecture & Tech Stack
-* **Backend:** PHP, MySQL (Relational Schema, Multi-Join Analytical Queries, Prepared Statements)[cite: 2, 3]
-* **Frontend:** JavaScript (ES6, Chart.js), HTML5, CSS3[cite: 3, 7]
-* **Environment:** Relational database integration with simulation-driven analytics[cite: 2, 3]
+* **Backend:** PHP, MySQL (Relational Schema, Multi-Join Analytical Queries, Prepared Statements)
+* **Frontend:** JavaScript (ES6, Chart.js), HTML5, CSS3
+* **Environment:** Relational database integration with simulation-driven analytics
 
 ## System Demo
 Watch the full project walkthrough and live functionality demo:
